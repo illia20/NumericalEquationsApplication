@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:id="@+id/equationField"
+        android:text="2*x + 1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:padding="7sp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="= 0"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/equationField"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center_horizontal"
+        android:id="@+id/labelzero"
+        android:padding="7sp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/accLabel"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelzero"
+        android:textSize="20sp"
+        android:padding="7sp"
+        android:text="Accuracy"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/accLabel"
+        app:layout_constraintTop_toBottomOf="@+id/labelzero"
+        android:maxLength="7"
+        android:lines="1"
+        android:text="0.0001"
+        android:inputType="numberDecimal"
+        android:id="@+id/accuracyField"
+        />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/accuracyField"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/group"
+        >
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bisection_button"
+            android:onClick="onRadioButtonClicked"
+            android:text="Bisection method"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/newton_button"
+            android:onClick="onRadioButtonClicked"
+            android:text="Newton method"/>
+    </RadioGroup>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bisectiontable"
+        app:layout_constraintTop_toBottomOf="@+id/group"
+        android:visibility="invisible"
+        android:padding="7sp"
+        >
+        <TableRow android:layout_width="match_parent"
+        android:layout_height="match_parent">
+            <TextView android:text="a"
+                android:padding="7sp"
+                android:textSize="20sp"
+                />
+            <EditText
+                android:id="@+id/bisect_a_par"
+                android:padding="7sp"
+                android:text="0"
+                android:inputType="numberDecimal|numberSigned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"/>
+        </TableRow>
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView android:text="b"
+                android:padding="7sp"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/bisect_b_par"
+                android:inputType="numberDecimal|numberSigned"
+                android:text="0"
+                android:padding="7sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"/>
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/newtontable"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/group"
+        >
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView android:text="f\'"
+                android:padding="7sp"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"/>
+            <EditText
+                android:id="@+id/newton_df"
+                android:text="0"
+                android:inputType="text"
+                android:lines="1"
+                android:padding="7sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </TableRow>
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView android:text="start point"
+                android:padding="7sp"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/newton_x0"
+                android:text="0"
+                android:inputType="numberDecimal|numberSigned"
+                android:padding="7sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </TableRow>
+    </TableLayout>
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Solve"
+        android:visibility="invisible"
+        android:id="@+id/solveButton"
+        app:layout_constraintTop_toBottomOf="@+id/bisectiontable"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/solveButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="24sp"
+        android:textSize="20sp"
+        android:id="@+id/result_steps"
+        />
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/result_steps"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/result_root"
+        />
+
+    <Button
+        android:id="@+id/plotButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="7sp"
+        android:text="Plot"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
